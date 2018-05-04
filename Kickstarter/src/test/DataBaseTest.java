@@ -1,27 +1,16 @@
 package test;
 
 import database.DataBase;
+import menu.Menu;
 import user.User;
 
 public class DataBaseTest {
 
 	public static void main(String[] args) {
 		
-		DataBase system = new DataBase();
+		Menu menu = new Menu();
 		
-		system.createAccount();
-		
-		
-		
-		
-		
-		System.out.println(system.getNumUsers());
-		
-		User user = system.getUserById(0);
-		
-		System.out.println(user);
-		
-		system.login();
+		menu.buildTitle("s");
 
 	}
 
