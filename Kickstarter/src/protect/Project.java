@@ -1,8 +1,10 @@
 package protect;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import exceptions.NegativeNumberException;
 import user.User;
 
 public class Project {
@@ -25,7 +27,9 @@ public class Project {
 	
 	public Project() {}
 	
-	public void createProject(Project project, User user) {
+	public void createProject(Project project, User user) throws NumberFormatException,
+															     InputMismatchException,
+	                                                             NegativeNumberException {
 		
 		Scanner input = new Scanner(System.in);
 		String name;
@@ -39,9 +43,9 @@ public class Project {
 		System.out.print("Qual a categoria do seu projeto? > ");
 		category = input.nextLine();
 		System.out.print("De quanto precisa para realizar o seu projeto? > R$ ");
-		goal = input.nextDouble();
+		goal = Double.parseDouble(input.nextLine());
 		System.out.print("Qual o valor da recompensa dos seus contribuidores? > R$ ");
-		reward = input.nextDouble();
+		reward = Double.parseDouble(input.nextLine());
 		
 		if (goal < 0.0 ) {
 			System.out.println("%n *** Metas negativas não sao permitidas! *** %n%n");
@@ -57,8 +61,7 @@ public class Project {
 		deadline = input.nextInt();
 		
 		if (deadline < 0) {
-			System.out.println("%n *** Prazos negativos não sao permitidos! *** %n%n");
-			return;
+			throw new NegativeNumberException(" *** Numeros negativos nao sao permitidos *** ");	
 		}
 		
 		project.setProject(name, category, goal, deadline, user, reward);

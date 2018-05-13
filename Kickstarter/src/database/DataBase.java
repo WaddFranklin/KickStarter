@@ -1,7 +1,11 @@
 package database;
 
 import java.util.Scanner;
+
+import exceptions.NegativeNumberException;
+
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 import protect.Project;
 import user.User;
@@ -58,7 +62,9 @@ public class DataBase {
 		addUser(newUser);
 	}
 	
-	public Project newProject(User user) {
+	public Project newProject(User user) throws NumberFormatException,
+	                                            InputMismatchException,
+	                                            NegativeNumberException {
 		
 		Project newProject = new Project();
 		newProject.createProject(newProject, user);
@@ -217,5 +223,21 @@ public class DataBase {
 
 	public ArrayList<Project> getProjects() {
 		return projects;
+	}
+
+	public static int getIdUsers() {
+		return idUsers;
+	}
+
+	public static void setIdUsers(int idUsers) {
+		DataBase.idUsers = idUsers;
+	}
+
+	public static int getIdProjects() {
+		return idProjects;
+	}
+
+	public static void setIdProjects(int idProjects) {
+		DataBase.idProjects = idProjects;
 	}
 }

@@ -1,8 +1,10 @@
 package main;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import database.DataBase;
+import exceptions.NegativeNumberException;
 import menu.Menu;
 import protect.Project;
 import user.User;
@@ -88,11 +90,22 @@ public class Controller {
 			switch (opt) {
 				
 				case 1:
-					
 					Project newProject = new Project();
-
-					menu.buildTitle("CRIAR PROJETO");;
-					newProject = system.newProject(currentUser);
+					
+					try {
+						menu.buildTitle("CRIAR PROJETO");;
+						newProject = system.newProject(currentUser);
+					}
+					catch(NumberFormatException e1) {
+						System.out.printf("%n *** O tipo de entrada nao foi a esperada! ***");
+						System.out.printf("%n *** Digite ponto para separar as casas decimais dos números! *** %n%n");
+						System.out.println(e1.getMessage());
+						break;
+					}
+					catch(NegativeNumberException e2) {
+						System.out.printf("%n%s%n%n", e2.getMessage());
+						break;
+					}
 					currentUser.addOwnedProject(newProject);
 					System.out.printf("%n *** Projeto criado com sucesso! *** %n%n");
 					break;
